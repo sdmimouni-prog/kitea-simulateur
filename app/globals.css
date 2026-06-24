@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+  background: #0f1216;
+}
+
+body {
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.touch-button {
+  min-height: 56px;
+}
+
+.qr-fallback {
+  background:
+    linear-gradient(90deg, #101012 12px, transparent 12px) 0 0 / 28px 28px,
+    linear-gradient(#101012 12px, transparent 12px) 0 0 / 28px 28px,
+    linear-gradient(90deg, transparent 16px, #101012 16px 24px, transparent 24px) 0 0 / 48px 48px,
+    #fff;
+}
+
+@media (orientation: portrait) {
+  .landscape-frame {
+    min-height: 100svh;
+  }
+}
