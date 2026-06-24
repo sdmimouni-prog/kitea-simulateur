@@ -217,8 +217,8 @@ export default function KiteaRoomRemix() {
   }
 
   return (
-    <main className="min-h-svh bg-[#111318] p-3 text-kitea-ink sm:p-4">
-      <section className="landscape-frame relative mx-auto flex aspect-[16/9] max-h-[calc(100svh-24px)] w-full max-w-[1500px] overflow-hidden rounded-none bg-white shadow-2xl">
+    <main className="min-h-svh bg-[#111318] p-0 text-kitea-ink sm:p-3">
+      <section className="landscape-frame relative mx-auto flex min-h-svh w-full overflow-hidden bg-white shadow-2xl lg:aspect-[16/9] lg:max-h-[calc(100svh-24px)] lg:min-h-0 lg:max-w-[1500px]">
         <AppChrome
           stage={stage}
           room={room}
@@ -229,7 +229,7 @@ export default function KiteaRoomRemix() {
         />
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_12%,rgba(104,199,233,0.22),transparent_28%),linear-gradient(135deg,#fff_0%,#fff_56%,#f6efe6_100%)]" />
-        <div className="relative z-10 flex h-full w-full flex-col px-7 pb-7 pt-24">
+        <div className="relative z-10 min-h-svh w-full overflow-y-auto px-4 pb-6 pt-36 sm:px-6 sm:pt-32 lg:flex lg:h-full lg:min-h-0 lg:flex-col lg:overflow-hidden lg:px-7 lg:pb-7 lg:pt-24">
           {stage === "home" && <HomeScreen onStart={() => moveTo("room")} />}
           {stage === "room" && <RoomScreen selected={room} onSelect={setRoom} onNext={() => moveTo("style")} />}
           {stage === "style" && <StyleScreen selected={style} onSelect={setStyle} onNext={() => moveTo("source")} />}
@@ -314,18 +314,18 @@ function AppChrome({
   const progress = stage === "admin" ? 100 : ((flowStages.indexOf(stage) + 1) / flowStages.length) * 100;
 
   return (
-    <header className="absolute inset-x-0 top-0 z-20 flex h-20 items-center gap-4 bg-white/94 px-7 shadow-sm backdrop-blur">
-      <button className="touch-button grid w-14 place-items-center border border-black/10 bg-white" onClick={onBack} aria-label="Retour">
-        <ArrowLeft className="h-6 w-6" />
+    <header className="absolute inset-x-0 top-0 z-20 flex min-h-20 flex-wrap items-center gap-2 bg-white/94 px-4 py-3 shadow-sm backdrop-blur sm:gap-4 sm:px-6 lg:h-20 lg:flex-nowrap lg:px-7 lg:py-0">
+      <button className="touch-button grid w-12 place-items-center border border-black/10 bg-white sm:w-14" onClick={onBack} aria-label="Retour">
+        <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
-      <button className="flex items-center gap-3" onClick={onHome} aria-label="Accueil KITEA">
-        <img src="/assets/kitea-logo.webp" alt="KITEA" className="h-12 w-12 object-contain" />
+      <button className="flex min-w-0 flex-1 items-center gap-2 sm:flex-none sm:gap-3" onClick={onHome} aria-label="Accueil KITEA">
+        <img src="/assets/kitea-logo.webp" alt="KITEA" className="h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12" />
         <div className="text-left">
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-kitea-red">KITEA Géant</p>
-          <p className="text-base font-black leading-tight">Réaménagez votre pièce</p>
+          <p className="text-[11px] font-black uppercase tracking-[0.1em] text-kitea-red sm:text-xs sm:tracking-[0.16em]">KITEA Géant</p>
+          <p className="line-clamp-1 text-sm font-black leading-tight sm:text-base">Réaménagez votre pièce</p>
         </div>
       </button>
-      <div className="min-w-0 flex-1">
+      <div className="order-3 w-full min-w-0 flex-1 sm:order-none sm:w-auto">
         <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase text-black/55">
           <span>{stage === "admin" ? "Back-office" : `${room} · ${style}`}</span>
           <span>{Math.round(progress)}%</span>
@@ -335,11 +335,11 @@ function AppChrome({
         </div>
       </div>
       <button
-        className="touch-button flex items-center gap-2 border border-black bg-kitea-ink px-5 font-black uppercase text-white"
+        className="touch-button flex items-center gap-2 border border-black bg-kitea-ink px-4 font-black uppercase text-white sm:px-5"
         onClick={onAdmin}
       >
         <LayoutDashboard className="h-5 w-5" />
-        Admin
+        <span className="hidden sm:inline">Admin</span>
       </button>
     </header>
   );
@@ -347,21 +347,21 @@ function AppChrome({
 
 function HomeScreen({ onStart }: { onStart: () => void }) {
   return (
-    <section className="grid h-full grid-cols-[0.9fr_1.1fr] gap-7">
+    <section className="grid min-h-[calc(100svh-9rem)] gap-6 lg:h-full lg:min-h-0 lg:grid-cols-[0.9fr_1.1fr] lg:gap-7">
       <div className="flex flex-col justify-center">
         <div className="mb-5 inline-flex w-fit items-center gap-2 bg-kitea-red px-4 py-2 text-sm font-black uppercase text-white">
           <Sun className="h-4 w-4" />
           Ambiance été
         </div>
-        <h1 className="max-w-[720px] text-6xl font-black leading-[0.95] text-kitea-ink">
+        <h1 className="max-w-[720px] text-4xl font-black leading-[0.98] text-kitea-ink sm:text-5xl lg:text-6xl lg:leading-[0.95]">
           Réaménagez votre pièce avec KITEA
         </h1>
-        <p className="mt-5 max-w-[620px] text-2xl font-bold leading-tight text-black/65">
+        <p className="mt-5 max-w-[620px] text-lg font-bold leading-tight text-black/65 sm:text-xl lg:text-2xl">
           Découvrez comment votre intérieur pourrait être transformé grâce aux produits KITEA.
         </p>
-        <div className="mt-8 flex items-center gap-4">
+        <div className="mt-8 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
           <button
-            className="touch-button flex items-center gap-4 bg-kitea-red px-9 py-4 text-2xl font-black uppercase text-white shadow-red"
+            className="touch-button flex items-center justify-center gap-4 bg-kitea-red px-7 py-4 text-xl font-black uppercase text-white shadow-red sm:text-2xl lg:px-9"
             onClick={onStart}
           >
             Commencer
@@ -373,11 +373,11 @@ function HomeScreen({ onStart }: { onStart: () => void }) {
           </div>
         </div>
       </div>
-      <div className="relative overflow-hidden border-8 border-kitea-red">
+      <div className="relative min-h-64 overflow-hidden border-8 border-kitea-red sm:min-h-80 lg:min-h-0">
         <img src="/assets/kitea-summer.webp" alt="Campagne été KITEA" className="h-full w-full object-cover" />
-        <div className="absolute bottom-5 left-5 flex items-center gap-3 bg-white px-4 py-3 shadow-touch">
+        <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 bg-white px-4 py-3 shadow-touch sm:right-auto">
           <Sparkles className="h-6 w-6 text-kitea-red" />
-          <span className="text-lg font-black">Projet prêt en moins de 15 secondes</span>
+          <span className="text-base font-black sm:text-lg">Projet prêt en moins de 15 secondes</span>
         </div>
       </div>
     </section>
@@ -400,20 +400,20 @@ function RoomScreen({
       action="Continuer"
       onNext={onNext}
     >
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         {rooms.map((room) => {
           const Icon = roomIcons[room];
           const isSelected = selected === room;
           return (
             <button
               key={room}
-              className={`flex h-64 flex-col justify-between border p-5 text-left transition ${
+              className={`flex min-h-40 flex-col justify-between border p-5 text-left transition sm:min-h-48 lg:h-64 ${
                 isSelected ? "border-kitea-red bg-kitea-red text-white shadow-red" : "border-black/10 bg-white text-kitea-ink shadow-sm"
               }`}
               onClick={() => onSelect(room)}
             >
-              <Icon className="h-12 w-12" />
-              <span className="text-3xl font-black">{room}</span>
+              <Icon className="h-10 w-10 lg:h-12 lg:w-12" />
+              <span className="text-2xl font-black lg:text-3xl">{room}</span>
               <span className={`text-sm font-bold uppercase ${isSelected ? "text-white/80" : "text-black/45"}`}>
                 Rayons adaptés
               </span>
@@ -436,23 +436,23 @@ function StyleScreen({
 }) {
   return (
     <ChoiceShell eyebrow="Étape 2" title="Choisissez l'ambiance" action="Valider le style" onNext={onNext}>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {styles.map((style) => {
           const isSelected = selected === style;
           return (
             <button
               key={style}
-              className={`min-h-44 border p-5 text-left transition ${
+              className={`min-h-40 border p-5 text-left transition lg:min-h-44 ${
                 isSelected ? "border-kitea-red bg-kitea-red text-white shadow-red" : "border-black/10 bg-white text-kitea-ink shadow-sm"
               }`}
               onClick={() => onSelect(style)}
             >
-              <div className="mb-8 flex items-center justify-between">
-                <WandSparkles className="h-9 w-9" />
+              <div className="mb-6 flex items-center justify-between lg:mb-8">
+                <WandSparkles className="h-8 w-8 lg:h-9 lg:w-9" />
                 {isSelected && <CheckCircle2 className="h-7 w-7" />}
               </div>
-              <h2 className="text-3xl font-black">{style}</h2>
-              <p className={`mt-2 text-lg font-bold ${isSelected ? "text-white/82" : "text-black/55"}`}>{styleNotes[style]}</p>
+              <h2 className="text-2xl font-black lg:text-3xl">{style}</h2>
+              <p className={`mt-2 text-base font-bold lg:text-lg ${isSelected ? "text-white/82" : "text-black/55"}`}>{styleNotes[style]}</p>
             </button>
           );
         })}
@@ -492,14 +492,14 @@ function SourceScreen({
 
   return (
     <ChoiceShell eyebrow="Étape 3" title="Ajoutez la photo de la pièce" action={null}>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
         {options.map((option) => {
           const Icon = option.icon;
           const isSelected = selected === option.id;
           return (
             <button
               key={option.id}
-              className={`relative min-h-80 border p-6 text-left transition ${
+              className={`relative min-h-56 border p-6 text-left transition lg:min-h-80 ${
                 isSelected ? "border-kitea-red bg-kitea-red text-white shadow-red" : "border-black/10 bg-white text-kitea-ink shadow-sm"
               }`}
               onClick={() => onSelect(option.id)}
@@ -509,12 +509,12 @@ function SourceScreen({
                   Recommandé
                 </span>
               )}
-              <Icon className="h-14 w-14" />
-              <h2 className="mt-16 max-w-[330px] text-3xl font-black leading-tight">{option.title}</h2>
-              <p className={`mt-4 text-lg font-bold leading-snug ${isSelected ? "text-white/82" : "text-black/55"}`}>
+              <Icon className="h-12 w-12 lg:h-14 lg:w-14" />
+              <h2 className="mt-10 max-w-[330px] text-2xl font-black leading-tight lg:mt-16 lg:text-3xl">{option.title}</h2>
+              <p className={`mt-4 text-base font-bold leading-snug lg:text-lg ${isSelected ? "text-white/82" : "text-black/55"}`}>
                 {option.note}
               </p>
-              <ChevronRight className="absolute bottom-6 right-6 h-9 w-9" />
+              <ChevronRight className="absolute bottom-6 right-6 h-7 w-7 lg:h-9 lg:w-9" />
             </button>
           );
         })}
@@ -537,34 +537,34 @@ function PhoneImportScreen({
   onFile: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
-    <section className="grid h-full grid-cols-[0.95fr_1.05fr] gap-7">
+    <section className="grid min-h-[calc(100svh-9rem)] gap-6 lg:h-full lg:min-h-0 lg:grid-cols-[0.95fr_1.05fr] lg:gap-7">
       <div className="flex flex-col justify-center">
         <StepLabel icon={QrCode} label="Import par QR Code" />
-        <h1 className="mt-5 text-5xl font-black leading-none">Scannez le QR Code pour envoyer votre photo</h1>
-        <p className="mt-5 max-w-[620px] text-xl font-bold leading-snug text-black/60">
+        <h1 className="mt-5 text-3xl font-black leading-none sm:text-4xl lg:text-5xl">Scannez le QR Code pour envoyer votre photo</h1>
+        <p className="mt-5 max-w-[620px] text-lg font-bold leading-snug text-black/60 lg:text-xl">
           Le client ouvre une page mobile, sélectionne ou prend sa photo, puis la tablette se met à jour automatiquement.
         </p>
-        <div className="mt-8 flex items-center gap-3">
-          <label className="touch-button flex items-center gap-3 border border-black bg-white px-5 py-4 text-lg font-black uppercase">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <label className="touch-button flex items-center justify-center gap-3 border border-black bg-white px-5 py-4 text-base font-black uppercase sm:text-lg">
             <Upload className="h-6 w-6" />
             Simuler un envoi
             <input className="hidden" type="file" accept="image/*" onChange={onFile} />
           </label>
-          <button className="touch-button flex items-center gap-3 bg-kitea-red px-7 py-4 text-lg font-black uppercase text-white" onClick={onReceive}>
+          <button className="touch-button flex items-center justify-center gap-3 bg-kitea-red px-7 py-4 text-base font-black uppercase text-white sm:text-lg" onClick={onReceive}>
             Continuer
             <ArrowRight className="h-6 w-6" />
           </button>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center border border-black/10 bg-white p-8 shadow-touch">
+      <div className="flex flex-col items-center justify-center border border-black/10 bg-white p-5 shadow-touch sm:p-8">
         <div className="mb-5 text-center">
           <p className="text-sm font-black uppercase tracking-[0.14em] text-kitea-red">{sessionId}</p>
-          <h2 className="text-3xl font-black">Photo mobile</h2>
+          <h2 className="text-2xl font-black sm:text-3xl">Photo mobile</h2>
         </div>
-        <div className="grid h-72 w-72 place-items-center border-8 border-kitea-red bg-white p-3">
+        <div className="grid h-56 w-56 place-items-center border-8 border-kitea-red bg-white p-3 sm:h-72 sm:w-72">
           {qr ? <img src={qr} alt="QR Code d'import photo" className="h-full w-full" /> : <div className="qr-fallback h-full w-full" />}
         </div>
-        <div className="mt-6 flex items-center gap-3 bg-kitea-sand px-5 py-4 text-lg font-black">
+        <div className="mt-6 flex items-center gap-3 bg-kitea-sand px-5 py-4 text-base font-black sm:text-lg">
           <CheckCircle2 className={`h-6 w-6 ${status.includes("succès") ? "text-kitea-leaf" : "text-black/35"}`} />
           {status}
         </div>
@@ -585,29 +585,29 @@ function CameraScreen({
   onValidate: () => void;
 }) {
   return (
-    <section className="grid h-full grid-cols-[1.15fr_0.85fr] gap-7">
-      <div className="relative overflow-hidden bg-black">
+    <section className="grid min-h-[calc(100svh-9rem)] gap-6 lg:h-full lg:min-h-0 lg:grid-cols-[1.15fr_0.85fr] lg:gap-7">
+      <div className="relative aspect-[16/10] overflow-hidden bg-black lg:aspect-auto">
         <img src="/assets/demo-before.png" alt="Aperçu caméra tablette" className="h-full w-full object-cover opacity-80" />
-        <div className="absolute inset-10 border-4 border-white/80" />
-        <div className="absolute bottom-6 left-6 right-6 bg-white px-5 py-4 text-xl font-black">
+        <div className="absolute inset-5 border-4 border-white/80 lg:inset-10" />
+        <div className="absolute bottom-4 left-4 right-4 bg-white px-4 py-3 text-base font-black sm:text-lg lg:bottom-6 lg:left-6 lg:right-6 lg:px-5 lg:py-4 lg:text-xl">
           Cadrez votre pièce de face avec un maximum de lumière.
         </div>
       </div>
       <div className="flex flex-col justify-center">
         <StepLabel icon={Camera} label="Caméra tablette" />
-        <h1 className="mt-5 text-5xl font-black leading-none">Prenez la photo de la pièce</h1>
-        <p className="mt-4 text-xl font-bold text-black/60">{status}</p>
+        <h1 className="mt-5 text-3xl font-black leading-none sm:text-4xl lg:text-5xl">Prenez la photo de la pièce</h1>
+        <p className="mt-4 text-lg font-bold text-black/60 lg:text-xl">{status}</p>
         <div className="mt-8 grid gap-4">
-          <label className="touch-button flex items-center justify-center gap-3 bg-kitea-red px-6 py-5 text-xl font-black uppercase text-white shadow-red">
+          <label className="touch-button flex items-center justify-center gap-3 bg-kitea-red px-6 py-5 text-lg font-black uppercase text-white shadow-red lg:text-xl">
             <Camera className="h-7 w-7" />
             Prendre la photo
             <input className="hidden" type="file" accept="image/*" capture="environment" onChange={onFile} />
           </label>
-          <button className="touch-button flex items-center justify-center gap-3 border border-black bg-white px-6 py-5 text-xl font-black uppercase" onClick={onRetake}>
+          <button className="touch-button flex items-center justify-center gap-3 border border-black bg-white px-6 py-5 text-lg font-black uppercase lg:text-xl" onClick={onRetake}>
             <RefreshCw className="h-6 w-6" />
             Refaire la photo
           </button>
-          <button className="touch-button flex items-center justify-center gap-3 bg-kitea-ink px-6 py-5 text-xl font-black uppercase text-white" onClick={onValidate}>
+          <button className="touch-button flex items-center justify-center gap-3 bg-kitea-ink px-6 py-5 text-lg font-black uppercase text-white lg:text-xl" onClick={onValidate}>
             <CheckCircle2 className="h-6 w-6" />
             Valider
           </button>
@@ -627,22 +627,22 @@ function DemoScreen({
   onValidate: () => void;
 }) {
   return (
-    <section className="grid h-full grid-cols-[0.9fr_1.1fr] gap-7">
+    <section className="grid min-h-[calc(100svh-9rem)] gap-6 lg:h-full lg:min-h-0 lg:grid-cols-[0.9fr_1.1fr] lg:gap-7">
       <div className="flex flex-col justify-center">
         <StepLabel icon={House} label="Mode démonstration" />
-        <h1 className="mt-5 text-5xl font-black leading-none">Choisissez une pièce modèle</h1>
-        <p className="mt-5 text-xl font-bold text-black/60">
+        <h1 className="mt-5 text-3xl font-black leading-none sm:text-4xl lg:text-5xl">Choisissez une pièce modèle</h1>
+        <p className="mt-5 text-lg font-bold text-black/60 lg:text-xl">
           Idéal pour montrer l'expérience immédiatement aux visiteurs qui n'ont pas de photo.
         </p>
         <button
-          className="touch-button mt-8 flex w-fit items-center gap-4 bg-kitea-red px-8 py-4 text-xl font-black uppercase text-white shadow-red"
+          className="touch-button mt-8 flex w-full items-center justify-center gap-4 bg-kitea-red px-8 py-4 text-lg font-black uppercase text-white shadow-red sm:w-fit lg:text-xl"
           onClick={onValidate}
         >
           Lancer l'analyse IA
           <Sparkles className="h-7 w-7" />
         </button>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {demoRooms.map((demo) => {
           const isSelected = selected === demo;
           return (
@@ -654,7 +654,7 @@ function DemoScreen({
               onClick={() => onSelect(demo)}
             >
               <img src="/assets/demo-before.png" alt="" className="h-24 w-full object-cover" />
-              <p className="mt-4 text-2xl font-black">{demo}</p>
+              <p className="mt-4 text-xl font-black lg:text-2xl">{demo}</p>
             </button>
           );
         })}
@@ -675,19 +675,19 @@ function AnalysisScreen({
   style: StyleType;
 }) {
   return (
-    <section className="grid h-full place-items-center">
+    <section className="grid min-h-[calc(100svh-9rem)] place-items-center lg:h-full lg:min-h-0">
       <div className="w-full max-w-4xl text-center">
-        <div className="mx-auto mb-8 grid h-28 w-28 place-items-center bg-kitea-red text-white shadow-red">
-          <Sparkles className="h-14 w-14 animate-pulse" />
+        <div className="mx-auto mb-8 grid h-20 w-20 place-items-center bg-kitea-red text-white shadow-red sm:h-24 sm:w-24 lg:h-28 lg:w-28">
+          <Sparkles className="h-10 w-10 animate-pulse sm:h-12 sm:w-12 lg:h-14 lg:w-14" />
         </div>
         <p className="text-sm font-black uppercase tracking-[0.16em] text-kitea-red">
           {room} · {style}
         </p>
-        <h1 className="mt-4 text-6xl font-black leading-none">{message}</h1>
+        <h1 className="mt-4 text-3xl font-black leading-none sm:text-5xl lg:text-6xl">{message}</h1>
         <div className="mx-auto mt-10 h-4 max-w-3xl bg-black/10">
           <div className="h-full bg-kitea-red transition-all duration-700" style={{ width: `${progress}%` }} />
         </div>
-        <div className="mt-8 grid grid-cols-3 gap-4 text-left">
+        <div className="mt-8 grid grid-cols-1 gap-4 text-left sm:grid-cols-3">
           <MiniMetric label="Catalogue" value="Produits réels" icon={Database} />
           <MiniMetric label="IA" value="< 15 sec." icon={WandSparkles} />
           <MiniMetric label="Magasin" value="Rayons associés" icon={MapPinned} />
@@ -711,22 +711,22 @@ function ResultScreen({
   onProducts: () => void;
 }) {
   return (
-    <section className="grid h-full grid-rows-[auto_1fr_auto] gap-5">
-      <div className="flex items-end justify-between">
+    <section className="grid min-h-[calc(100svh-9rem)] gap-5 lg:h-full lg:min-h-0 lg:grid-rows-[auto_1fr_auto]">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <StepLabel icon={ImagePlus} label="Avant / Après" />
-          <h1 className="mt-3 text-4xl font-black">Votre proposition {style.toLowerCase()} pour {room.toLowerCase()}</h1>
+          <h1 className="mt-3 text-3xl font-black sm:text-4xl">Votre proposition {style.toLowerCase()} pour {room.toLowerCase()}</h1>
         </div>
-        <button className="touch-button flex items-center gap-3 bg-kitea-red px-7 py-4 text-lg font-black uppercase text-white" onClick={onProducts}>
+        <button className="touch-button flex w-full items-center justify-center gap-3 bg-kitea-red px-7 py-4 text-base font-black uppercase text-white sm:w-auto lg:text-lg" onClick={onProducts}>
           Voir les produits
           <ShoppingBag className="h-6 w-6" />
         </button>
       </div>
-      <div className="grid min-h-0 grid-cols-2 gap-5">
+      <div className="grid min-h-0 grid-cols-1 gap-5 lg:grid-cols-2">
         <BeforeAfterPanel label="Avant" image={photoPreview} />
         <BeforeAfterPanel label="Après" image="/assets/demo-after.png" />
       </div>
-      <div className="grid grid-cols-6 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         {products.map((product) => (
           <div key={product.id} className="flex items-center gap-3 border border-black/10 bg-white p-3">
             <img src={product.image} alt="" className="h-14 w-14 object-contain" />
@@ -755,37 +755,37 @@ function ProductsScreen({
   onPickup: () => void;
 }) {
   return (
-    <section className="grid h-full grid-rows-[auto_1fr] gap-5">
-      <div className="flex items-end justify-between">
+    <section className="grid min-h-[calc(100svh-9rem)] gap-5 lg:h-full lg:min-h-0 lg:grid-rows-[auto_1fr]">
+      <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
         <div>
           <StepLabel icon={PackageCheck} label="Produits KITEA recommandés" />
-          <h1 className="mt-3 text-4xl font-black">Sélection catalogue uniquement</h1>
+          <h1 className="mt-3 text-3xl font-black sm:text-4xl">Sélection catalogue uniquement</h1>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="bg-white px-5 py-3 text-right shadow-sm">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div className="bg-white px-5 py-3 text-left shadow-sm sm:text-right">
             <p className="text-xs font-black uppercase text-black/45">Panier indicatif</p>
             <p className="text-2xl font-black">{formatPrice(totalValue)}</p>
           </div>
-          <button className="touch-button flex items-center gap-3 bg-kitea-red px-7 py-4 text-lg font-black uppercase text-white" onClick={onPickup}>
+          <button className="touch-button flex items-center justify-center gap-3 bg-kitea-red px-7 py-4 text-base font-black uppercase text-white lg:text-lg" onClick={onPickup}>
             Voir en magasin
             <Route className="h-6 w-6" />
           </button>
         </div>
       </div>
-      <div className="grid min-h-0 grid-cols-[1.3fr_0.7fr] gap-5">
-        <div className="grid min-h-0 grid-cols-3 gap-4 overflow-y-auto pr-1 no-scrollbar">
+      <div className="grid min-h-0 gap-5 xl:grid-cols-[1.3fr_0.7fr]">
+        <div className="grid min-h-0 grid-cols-1 gap-4 overflow-visible sm:grid-cols-2 lg:grid-cols-3 xl:overflow-y-auto xl:pr-1 no-scrollbar">
           {products.map((product) => (
             <button
               key={product.id}
-              className="flex min-h-64 flex-col border border-black/10 bg-white p-4 text-left shadow-sm transition hover:border-kitea-red"
+              className="flex min-h-56 flex-col border border-black/10 bg-white p-4 text-left shadow-sm transition hover:border-kitea-red lg:min-h-64"
               onClick={() => onSelectProduct(product)}
             >
               <div className="grid h-28 place-items-center bg-kitea-sand">
                 <img src={product.image} alt={product.name} className="h-24 w-28 object-contain" />
               </div>
               <div className="mt-4 flex flex-1 flex-col">
-                <p className="text-lg font-black leading-tight">{product.name}</p>
-                <p className="mt-2 text-2xl font-black text-kitea-red">{formatPrice(product.price)}</p>
+                <p className="text-base font-black leading-tight lg:text-lg">{product.name}</p>
+                <p className="mt-2 text-xl font-black text-kitea-red lg:text-2xl">{formatPrice(product.price)}</p>
                 <div className="mt-auto grid gap-1 text-sm font-bold text-black/55">
                   <span>Réf. {product.ref}</span>
                   <span>{product.availability} · {product.aisle}</span>
@@ -794,13 +794,13 @@ function ProductsScreen({
             </button>
           ))}
         </div>
-        <aside className="border border-black/10 bg-white p-5 shadow-touch">
+        <aside className="min-h-80 border border-black/10 bg-white p-5 shadow-touch xl:min-h-0">
           {selectedProduct ? (
             <ProductDetail product={selectedProduct} />
           ) : (
             <div className="flex h-full flex-col justify-center text-center">
               <Search className="mx-auto h-16 w-16 text-kitea-red" />
-              <h2 className="mt-5 text-3xl font-black">Touchez un produit</h2>
+              <h2 className="mt-5 text-2xl font-black lg:text-3xl">Touchez un produit</h2>
               <p className="mt-3 text-lg font-bold text-black/55">La fiche réelle, la référence et le rayon s'affichent ici.</p>
             </div>
           )}
@@ -812,13 +812,13 @@ function ProductsScreen({
 
 function ProductDetail({ product }: { product: KiteaProduct }) {
   return (
-    <div className="flex h-full flex-col">
-      <div className="grid h-48 place-items-center bg-kitea-sand">
-        <img src={product.image} alt={product.name} className="h-44 object-contain" />
+    <div className="flex h-full min-h-0 flex-col">
+      <div className="grid h-40 place-items-center bg-kitea-sand lg:h-48">
+        <img src={product.image} alt={product.name} className="h-36 object-contain lg:h-44" />
       </div>
-      <h2 className="mt-5 text-3xl font-black leading-tight">{product.name}</h2>
-      <p className="mt-3 text-4xl font-black text-kitea-red">{formatPrice(product.price)}</p>
-      <div className="mt-5 grid gap-3 text-lg font-bold">
+      <h2 className="mt-5 text-2xl font-black leading-tight lg:text-3xl">{product.name}</h2>
+      <p className="mt-3 text-3xl font-black text-kitea-red lg:text-4xl">{formatPrice(product.price)}</p>
+      <div className="mt-5 grid gap-3 text-base font-bold lg:text-lg">
         <InfoLine label="Référence" value={product.ref} />
         <InfoLine label="Disponibilité" value={product.availability} />
         <InfoLine label="Rayon" value={`${product.department} · ${product.aisle}`} />
@@ -828,7 +828,7 @@ function ProductDetail({ product }: { product: KiteaProduct }) {
         href={product.productUrl}
         target="_blank"
         rel="noreferrer"
-        className="touch-button mt-auto flex items-center justify-center gap-3 bg-kitea-ink px-5 py-4 text-lg font-black uppercase text-white"
+        className="touch-button mt-6 flex items-center justify-center gap-3 bg-kitea-ink px-5 py-4 text-base font-black uppercase text-white lg:mt-auto lg:text-lg"
       >
         Ouvrir la fiche
         <ArrowRight className="h-6 w-6" />
@@ -848,36 +848,36 @@ function PickupScreen({
 }) {
   const departments = [...new Set(products.map((product) => product.department))];
   return (
-    <section className="grid h-full grid-cols-[0.9fr_1.1fr] gap-7">
+    <section className="grid min-h-[calc(100svh-9rem)] gap-6 lg:h-full lg:min-h-0 lg:grid-cols-[0.9fr_1.1fr] lg:gap-7">
       <div className="flex flex-col justify-center">
         <StepLabel icon={MapPinned} label="Orientation magasin" />
-        <h1 className="mt-5 text-5xl font-black leading-none">Retrouvez votre sélection dans le magasin</h1>
+        <h1 className="mt-5 text-3xl font-black leading-none sm:text-4xl lg:text-5xl">Retrouvez votre sélection dans le magasin</h1>
         <div className="mt-8 grid gap-4">
           {departments.map((department) => {
             const first = products.find((product) => product.department === department)!;
             return (
               <div key={department} className="flex items-center justify-between border border-black/10 bg-white p-5 shadow-sm">
                 <div>
-                  <p className="text-2xl font-black">{department}</p>
-                  <p className="text-lg font-bold text-black/55">{first.zone}</p>
+                  <p className="text-xl font-black lg:text-2xl">{department}</p>
+                  <p className="text-base font-bold text-black/55 lg:text-lg">{first.zone}</p>
                 </div>
-                <div className="bg-kitea-red px-5 py-3 text-xl font-black text-white">{first.aisle}</div>
+                <div className="bg-kitea-red px-4 py-3 text-lg font-black text-white lg:px-5 lg:text-xl">{first.aisle}</div>
               </div>
             );
           })}
         </div>
       </div>
-      <div className="grid grid-rows-[1fr_auto] gap-5">
-        <div className="grid grid-cols-[0.8fr_1.2fr] gap-5 border border-black/10 bg-white p-6 shadow-touch">
+      <div className="grid gap-5 lg:grid-rows-[1fr_auto]">
+        <div className="grid gap-5 border border-black/10 bg-white p-5 shadow-touch sm:grid-cols-[0.8fr_1.2fr] lg:p-6">
           <div className="flex flex-col items-center justify-center">
-            <div className="grid h-52 w-52 place-items-center border-8 border-kitea-red bg-white p-2">
+            <div className="grid h-44 w-44 place-items-center border-8 border-kitea-red bg-white p-2 sm:h-52 sm:w-52">
               {recoveryQr ? <img src={recoveryQr} alt="QR Code de récupération" /> : <div className="qr-fallback h-full w-full" />}
             </div>
             <p className="mt-4 text-center text-sm font-black uppercase text-black/45">Projet, produits, références</p>
           </div>
           <div className="flex flex-col justify-center">
-            <h2 className="text-4xl font-black">QR Code personnel</h2>
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            <h2 className="text-3xl font-black lg:text-4xl">QR Code personnel</h2>
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <ActionTile icon={Mail} label="Email" />
               <ActionTile icon={Send} label="WhatsApp" />
               <ActionTile icon={QrCode} label="Scanner" />
@@ -886,7 +886,7 @@ function PickupScreen({
           </div>
         </div>
         <button
-          className="touch-button flex items-center justify-center gap-4 bg-kitea-red px-8 py-5 text-2xl font-black uppercase text-white shadow-red"
+          className="touch-button flex items-center justify-center gap-4 bg-kitea-red px-8 py-5 text-xl font-black uppercase text-white shadow-red lg:text-2xl"
           onClick={onCoupon}
         >
           Je participe
@@ -899,18 +899,18 @@ function PickupScreen({
 
 function CouponScreen({ onRestart }: { onRestart: () => void }) {
   return (
-    <section className="grid h-full grid-cols-[1.05fr_0.95fr] gap-7">
-      <div className="relative overflow-hidden border-8 border-kitea-red">
+    <section className="grid min-h-[calc(100svh-9rem)] gap-6 lg:h-full lg:min-h-0 lg:grid-cols-[1.05fr_0.95fr] lg:gap-7">
+      <div className="relative aspect-[16/9] overflow-hidden border-8 border-kitea-red lg:aspect-auto">
         <img src="/assets/kitea-wheel-screen.jpeg" alt="Animation Roue des Coupons KITEA" className="h-full w-full object-cover" />
       </div>
       <div className="flex flex-col justify-center">
         <StepLabel icon={Sparkles} label="Animation KITEA" />
-        <h1 className="mt-5 text-6xl font-black leading-none">Votre projet est prêt !</h1>
-        <p className="mt-6 max-w-[600px] text-2xl font-bold leading-tight text-black/65">
+        <h1 className="mt-5 text-4xl font-black leading-none sm:text-5xl lg:text-6xl">Votre projet est prêt !</h1>
+        <p className="mt-6 max-w-[600px] text-lg font-bold leading-tight text-black/65 sm:text-xl lg:text-2xl">
           Rendez-vous maintenant au stand KITEA pour tenter d'augmenter votre coupon grâce à la Roue des Coupons.
         </p>
         <button
-          className="touch-button mt-9 flex w-fit items-center gap-4 bg-kitea-red px-8 py-5 text-2xl font-black uppercase text-white shadow-red"
+          className="touch-button mt-9 flex w-full items-center justify-center gap-4 bg-kitea-red px-8 py-5 text-xl font-black uppercase text-white shadow-red sm:w-fit lg:text-2xl"
           onClick={onRestart}
         >
           Nouveau projet
@@ -923,18 +923,18 @@ function CouponScreen({ onRestart }: { onRestart: () => void }) {
 
 function AdminScreen({ onClose }: { onClose: () => void }) {
   return (
-    <section className="grid h-full grid-rows-[auto_1fr] gap-5">
-      <div className="flex items-end justify-between">
+    <section className="grid min-h-[calc(100svh-9rem)] gap-5 lg:h-full lg:min-h-0 lg:grid-rows-[auto_1fr]">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <StepLabel icon={LayoutDashboard} label="Back-office admin" />
-          <h1 className="mt-3 text-4xl font-black">Catalogue, magasins, leads et simulations</h1>
+          <h1 className="mt-3 text-3xl font-black sm:text-4xl">Catalogue, magasins, leads et simulations</h1>
         </div>
-        <button className="touch-button flex items-center gap-3 bg-kitea-ink px-7 py-4 text-lg font-black uppercase text-white" onClick={onClose}>
+        <button className="touch-button flex w-full items-center justify-center gap-3 bg-kitea-ink px-7 py-4 text-base font-black uppercase text-white sm:w-fit lg:text-lg" onClick={onClose}>
           Retour expérience
           <ArrowRight className="h-6 w-6" />
         </button>
       </div>
-      <div className="grid min-h-0 grid-cols-[0.75fr_1.25fr] gap-5">
+      <div className="grid min-h-0 gap-5 xl:grid-cols-[0.75fr_1.25fr]">
         <div className="grid gap-4">
           <AdminImport icon={FileSpreadsheet} title="Import catalogue Excel" detail="XLSX, prix, références, images" />
           <AdminImport icon={Upload} title="Import CSV" detail="Produits, stocks, rayons" />
@@ -942,21 +942,21 @@ function AdminScreen({ onClose }: { onClose: () => void }) {
           <AdminImport icon={Store} title="Gestion magasins" detail="KITEA Géant, allées, zones" />
         </div>
         <div className="grid min-h-0 grid-rows-[auto_1fr] gap-5">
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             <MiniMetric icon={PackageCheck} label="Produits" value={String(kiteaCatalog.length)} />
             <MiniMetric icon={ClipboardList} label="Simulations" value="184" />
             <MiniMetric icon={BarChart3} label="Temps moyen" value="11 s" />
             <MiniMetric icon={Mail} label="Leads export" value="42" />
           </div>
-          <div className="min-h-0 overflow-hidden border border-black/10 bg-white shadow-touch">
-            <div className="grid grid-cols-[1.1fr_0.55fr_0.45fr_0.55fr_0.6fr] bg-kitea-ink px-4 py-3 text-sm font-black uppercase text-white">
+          <div className="min-h-0 overflow-x-auto border border-black/10 bg-white shadow-touch">
+            <div className="grid min-w-[760px] grid-cols-[1.1fr_0.55fr_0.45fr_0.55fr_0.6fr] bg-kitea-ink px-4 py-3 text-sm font-black uppercase text-white">
               <span>Produit</span>
               <span>Référence</span>
               <span>Prix</span>
               <span>Rayon</span>
               <span>Source</span>
             </div>
-            <div className="max-h-[430px] overflow-y-auto no-scrollbar">
+            <div className="max-h-[430px] min-w-[760px] overflow-y-auto no-scrollbar">
               {kiteaCatalog.map((product) => (
                 <div
                   key={product.id}
@@ -993,15 +993,15 @@ function ChoiceShell({
   children: React.ReactNode;
 }) {
   return (
-    <section className="grid h-full grid-rows-[auto_1fr_auto] gap-6">
+    <section className="grid min-h-[calc(100svh-9rem)] gap-5 lg:h-full lg:min-h-0 lg:grid-rows-[auto_1fr_auto] lg:gap-6">
       <div>
         <p className="text-sm font-black uppercase tracking-[0.16em] text-kitea-red">{eyebrow}</p>
-        <h1 className="mt-2 text-5xl font-black leading-none">{title}</h1>
+        <h1 className="mt-2 text-3xl font-black leading-none sm:text-4xl lg:text-5xl">{title}</h1>
       </div>
       <div className="min-h-0">{children}</div>
       {action && onNext ? (
-        <div className="flex justify-end">
-          <button className="touch-button flex items-center gap-3 bg-kitea-red px-8 py-4 text-xl font-black uppercase text-white shadow-red" onClick={onNext}>
+        <div className="flex justify-stretch sm:justify-end">
+          <button className="touch-button flex w-full items-center justify-center gap-3 bg-kitea-red px-8 py-4 text-lg font-black uppercase text-white shadow-red sm:w-auto lg:text-xl" onClick={onNext}>
             {action}
             <ArrowRight className="h-7 w-7" />
           </button>
@@ -1013,16 +1013,16 @@ function ChoiceShell({
 
 function BeforeAfterPanel({ label, image }: { label: string; image: string }) {
   return (
-    <div className="relative overflow-hidden border border-black/10 bg-black">
+    <div className="relative aspect-[16/10] overflow-hidden border border-black/10 bg-black lg:aspect-auto">
       <img src={image} alt={`${label} de la pièce`} className="h-full w-full object-cover" />
-      <div className="absolute left-4 top-4 bg-white px-4 py-2 text-xl font-black uppercase text-kitea-red shadow-sm">{label}</div>
+      <div className="absolute left-3 top-3 bg-white px-3 py-2 text-base font-black uppercase text-kitea-red shadow-sm sm:left-4 sm:top-4 sm:px-4 sm:text-xl">{label}</div>
     </div>
   );
 }
 
 function StepLabel({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
   return (
-    <div className="inline-flex w-fit items-center gap-2 bg-kitea-red px-4 py-2 text-sm font-black uppercase tracking-[0.08em] text-white">
+    <div className="inline-flex w-fit items-center gap-2 bg-kitea-red px-3 py-2 text-xs font-black uppercase tracking-[0.08em] text-white sm:px-4 sm:text-sm">
       <Icon className="h-4 w-4" />
       {label}
     </div>
@@ -1032,9 +1032,9 @@ function StepLabel({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
 function MiniMetric({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   return (
     <div className="border border-black/10 bg-white p-4 shadow-sm">
-      <Icon className="h-7 w-7 text-kitea-red" />
+      <Icon className="h-6 w-6 text-kitea-red lg:h-7 lg:w-7" />
       <p className="mt-4 text-xs font-black uppercase text-black/45">{label}</p>
-      <p className="text-2xl font-black">{value}</p>
+      <p className="text-xl font-black lg:text-2xl">{value}</p>
     </div>
   );
 }
@@ -1050,7 +1050,7 @@ function InfoLine({ label, value }: { label: string; value: string }) {
 
 function ActionTile({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
   return (
-    <button className="touch-button flex items-center justify-center gap-2 border border-black/10 bg-kitea-sand px-4 py-4 font-black uppercase">
+    <button className="touch-button flex items-center justify-center gap-2 border border-black/10 bg-kitea-sand px-4 py-4 text-sm font-black uppercase sm:text-base">
       <Icon className="h-5 w-5 text-kitea-red" />
       {label}
     </button>
@@ -1059,12 +1059,12 @@ function ActionTile({ icon: Icon, label }: { icon: LucideIcon; label: string }) 
 
 function AdminImport({ icon: Icon, title, detail }: { icon: LucideIcon; title: string; detail: string }) {
   return (
-    <label className="flex min-h-28 items-center gap-4 border border-black/10 bg-white p-5 shadow-sm">
+    <label className="flex min-h-24 items-center gap-4 border border-black/10 bg-white p-4 shadow-sm lg:min-h-28 lg:p-5">
       <span className="grid h-14 w-14 shrink-0 place-items-center bg-kitea-red text-white">
         <Icon className="h-7 w-7" />
       </span>
       <span className="min-w-0">
-        <span className="block text-2xl font-black leading-tight">{title}</span>
+        <span className="block text-xl font-black leading-tight lg:text-2xl">{title}</span>
         <span className="block text-sm font-bold uppercase text-black/45">{detail}</span>
       </span>
       <input className="hidden" type="file" accept=".csv,.xlsx,.xls" />
